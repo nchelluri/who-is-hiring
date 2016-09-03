@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title class="title"><%= story['title'] %></title>
+  <link href="whoshiring.css" rel="stylesheet">
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1 class="title"><a href="https://news.ycombinator.com/item?id=<%= story['id'] %>"><%= story['title'] %></a></h1>
+  <div id="text"><%= story['text'] %></div>
+
+  <hr>
+
+  <div class="search">
+    <button id="remote">Remote</button>
+    <button id="intern">Interns</button>
+    <button id="visa">Visa</button>
+    <label>
+      Case insensitive search - string literals or regexps:
+      <input id="query" type="text" placeholder="No surrounding slashes"/>
+    </label>
+  </div>
+
+  <hr>
+
+  <div class="comments">
+    <%= comments_output %>
+  </div>
+
+  <script>
+var comments = document.getElementsByClassName('comments')[0].getElementsByClassName('content');
+
+function filterButton(hiddenKlass, initialText, afterText, keyword) {
+  return function filter(e) {
+    var button = e.currentTarget;
+
+    if (button.innerText == initialText) {
+      for (var i = 0; i < comments.length; i++) {
+        if (! comments[i].classList.contains(keyword)) {
+          comments[i].classList.add(hiddenKlass);
+        }
+      }
+
+      button.innerText = afterText;
+    } else {
+      for (var i = 0; i < comments.length; i++) {
+        comments[i].classList.remove(hiddenKlass);
+      }
+
+      button.innerText = initialText;
+    }
+  };
+}
+
+document.getElementById('remote').addEventListener('click', filterButton('remoteHidden', 'Remote', 'Remote & Onsite', 'remote'));
+document.getElementById('intern').addEventListener('click', filterButton('internsHidden', 'Interns', 'Interns & FT', 'interns'));
+document.getElementById('visa').addEventListener('click', filterButton('visaHidden', 'Visa', 'Visa & Non-Visa', 'visa'));
+
+document.getElementById('query').addEventListener('change', function(e) {
+  var textField = e.currentTarget;
+  var hiddenKlass = 'queryHidden';
+
+  if (textField.value === '') {
+    for (var i = 0; i < comments.length; i++) {
+      comments[i].classList.remove(hiddenKlass);
+    }
+  } else {
+    for (var i = 0; i < comments.length; i++) {
+      if (! comments[i].innerText.match(new RegExp(textField.value, 'i'))) {
+        comments[i].classList.add(hiddenKlass);
+      }
+    }
+  }
+
+});
+
+  </script>
+</body>
+</html>
