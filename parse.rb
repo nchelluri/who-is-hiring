@@ -3,7 +3,13 @@
 require 'json'
 require 'erb'
 
-id = 12405698
+unless ARGV.length == 1
+  puts "usage: #{$0} story_id"
+  puts '       where story_id is the ID of a "Who\'s Hiring?" post'
+  exit 1
+end
+
+id = ARGV[0]
 
 story = JSON.parse(File.read("story-and-comments-for-#{id}.json"))
 
