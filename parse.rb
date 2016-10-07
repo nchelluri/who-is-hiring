@@ -3,18 +3,6 @@
 require 'json'
 require 'erb'
 
-unless ARGV.length == 1
-  puts "usage: #{$0} story_id"
-  puts '       where story_id is the ID of a "Who\'s Hiring?" post'
-  exit 1
-end
-
-id = ARGV[0]
-
-story = JSON.parse(File.read("story-and-comments-for-#{id}.json"))
-
-erb = ERB.new(File.read('whoshiring.html.erb'))
-
 def comments_output(item, level = 1)
   output = ''
 
@@ -36,9 +24,26 @@ def comments_output(item, level = 1)
   output
 end
 
-comments_output = ''
-story['comments'].each do |comment|
-  comments_output += comments_output(comment)
+def get_output(story)
+  comments_output = ''
+  story['comments'].each do |comment|
+    comments_output += comments_output(comment)
+  end
+
+  erb = ERB.new(File.read('whoshiring.html.erb'))
+  erb.result(binding)
 end
 
-puts erb.result(binding)
+if $0 == __FILE__
+  unless ARGV.length == 1
+    puts "usage: #{$0} story_id"
+    puts '       where story_id is the ID of a "Who\'s Hiring?" post'
+    exit 1
+  end
+
+  id = ARGV[0]
+
+  story = JSON.parse(File.read("story-and-comments-for-#{id}.json"))
+
+  puts generate_output(story)
+end
