@@ -9,7 +9,7 @@ require 'nokogiri'
 def get_item(id)
   puts "Getting #{id}"
   obj = JSON.parse(Net::HTTP.get(URI("https://hacker-news.firebaseio.com/v0/item/#{id}.json?print=pretty")))
-  obj['text'] = Nokogiri::HTML::fragment(obj['text'])
+  obj['text'] = Nokogiri::HTML::fragment(obj['text']).to_html
   obj['by'] = CGI::escape(obj['by']) if obj['by'] != nil
   obj
 end
