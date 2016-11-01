@@ -33,7 +33,7 @@ unless id
 end
 
 story = get_comments_for_story(id)
-File.open('whoshiring.html', 'w') do |f|
+File.open('who-is-hiring.html', 'w') do |f|
   f.puts get_output(story)
 end
-puts "Generated whoshiring.html for #{when_str}."
+puts "Generated who-is-hiring.html for #{when_str}."

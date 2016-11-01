@@ -30,14 +30,14 @@ def get_output(story)
     comments_output += comments_output(comment)
   end
 
-  erb = ERB.new(File.read('whoshiring.html.erb'))
+  erb = ERB.new(File.read('who-is-hiring.html.erb'))
   erb.result(binding)
 end
 
 if $0 == __FILE__
   unless ARGV.length == 1
     puts "usage: #{$0} story_id"
-    puts '       where story_id is the ID of a "Who\'s Hiring?" post'
+    puts '       where story_id is the ID of a "Who Is Hiring?" post'
     exit 1
   end
 
