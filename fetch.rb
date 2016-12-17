@@ -16,13 +16,14 @@ def get_item(id)
     obj['by'] = CGI::escape(obj['by']) if obj['by'] != nil
     obj
   rescue => e
+    puts "Error getting item with ID #{id}."
     puts e
     puts result
 
     count += 1
     retry if count <= 3
 
-    raise
+    nil
   end
 end
 
@@ -30,7 +31,7 @@ def get_comments(id)
   comments = []
 
   comment = get_item(id)
-  return comments if comment['dead'] || comment['deleted']
+  return comments if ! comment || comment['dead'] || comment['deleted']
 
   comments << comment
   if comment['kids']
