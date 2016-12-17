@@ -111,7 +111,9 @@ if (deleted) {
   deleted = JSON.parse(deleted);
   Object.keys(deleted).forEach(function(id) {
     var comment = document.getElementById(id);
-    comment.parentNode.removeChild(comment);
+    if (comment) {
+      comment.parentNode.removeChild(comment);
+    }
   });
 }
 
