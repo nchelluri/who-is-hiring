@@ -12,10 +12,10 @@ def comments_output(item, level = 1)
   classes += 'interns ' if item['text'] =~ /interns/i
   classes += 'visa ' if item['text'] =~ /visa/i
 
-  output += '<div class="content ' + classes + '"' + (level > 1 ? ' style="margin-left:' + (level * 20).to_s + 'px"' : '') + '>' +
-      '<strong>by <a href="https://news.ycombinator.com/user?id=' + item['by'] + '">' + item['by'] +
+  output += '<div class="content ' + classes + '"' + (level > 1 ? ' style="margin-left:' + (level * 20).to_s + 'px"' : '') + ' id="comment_' + item['id'].to_s + '">' +
+      '<div class="close">&times;</div><strong>by <a href="https://news.ycombinator.com/user?id=' + item['by'] + '">' + item['by'] +
       '</a></strong> <small><a href="https://news.ycombinator.com/item?id=' + item['id'].to_s + '">Original Post</a>' +
-      '</small><br><br>' + item['text'] + '</div>' + "\n\n"
+      ' ' + Time.at(item['time']).to_s + '</small><br><br>' + item['text'] + '</div>' + "\n\n"
 
   item['comments'].each do |comment|
     output += comments_output(comment, level + 1)

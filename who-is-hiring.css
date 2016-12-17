@@ -42,3 +42,8 @@ pre {
 .queryHidden {
     display: none;
 }
+
+.close {
+    float: right;
+    cursor: pointer;
+}

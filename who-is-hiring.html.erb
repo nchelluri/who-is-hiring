@@ -23,6 +23,12 @@
 
   <hr>
 
+  <div class="deleted">
+    <button id="restoreDeleted">Restore Deleted Items</button>
+  </div>
+
+  <hr>
+
   <div class="comments">
     <%= comments_output %>
   </div>
@@ -71,8 +77,43 @@ document.getElementById('query').addEventListener('change', function(e) {
       }
     }
   }
-
 });
+
+document.addEventListener('click', function(e) {
+  var target = e.target;
+
+  if (target.tagName == 'DIV' && target.classList.contains('close')) {
+    if (target.parentNode.id) {
+      var deleted = localStorage.getItem('deleted');
+
+      if (! deleted) {
+        deleted = {};
+      } else {
+        deleted = JSON.parse(deleted);
+      }
+
+      deleted[target.parentNode.id] = true;
+
+      localStorage.setItem("deleted", JSON.stringify(deleted));
+    }
+
+    target.parentNode.parentNode.removeChild(target.parentNode);
+  }
+});
+
+document.getElementById('restoreDeleted').addEventListener('click', function() {
+  localStorage.setItem('deleted', JSON.stringify({}));
+  window.location.reload();
+});
+
+var deleted = localStorage.getItem('deleted');
+if (deleted) {
+  deleted = JSON.parse(deleted);
+  Object.keys(deleted).forEach(function(id) {
+    var comment = document.getElementById(id);
+    comment.parentNode.removeChild(comment);
+  });
+}
 
   </script>
 </body>
