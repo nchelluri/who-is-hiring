@@ -7,11 +7,23 @@ require 'cgi'
 require 'nokogiri'
 
 def get_item(id)
-  puts "Getting #{id}"
-  obj = JSON.parse(Net::HTTP.get(URI("https://hacker-news.firebaseio.com/v0/item/#{id}.json?print=pretty")))
-  obj['text'] = Nokogiri::HTML::fragment(obj['text']).to_html
-  obj['by'] = CGI::escape(obj['by']) if obj['by'] != nil
-  obj
+  begin
+    count = 0
+    puts "Getting #{id}"
+    result = Net::HTTP.get(URI("https://hacker-news.firebaseio.com/v0/item/#{id}.json?print=pretty"))
+    obj = JSON.parse(result)
+    obj['text'] = Nokogiri::HTML::fragment(obj['text']).to_html
+    obj['by'] = CGI::escape(obj['by']) if obj['by'] != nil
+    obj
+  rescue => e
+    puts e
+    puts result
+
+    count += 1
+    retry if count <= 3
+
+    raise
+  end
 end
 
 def get_comments(id)
