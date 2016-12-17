@@ -7,8 +7,8 @@ require 'cgi'
 require 'nokogiri'
 
 def get_item(id)
+  count = 0
   begin
-    count = 0
     puts "Getting item with ID #{id}."
     result = Net::HTTP.get(URI("https://hacker-news.firebaseio.com/v0/item/#{id}.json?print=pretty"))
     obj = JSON.parse(result)
