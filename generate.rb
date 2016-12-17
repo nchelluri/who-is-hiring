@@ -32,7 +32,9 @@ unless id
   exit 1
 end
 
-story = get_comments_for_story(id)
+refresh = ARGV[0] == '--refresh'
+
+story = get_comments_for_story(id, refresh)
 File.open('who-is-hiring.html', 'w') do |f|
   f.puts get_output(story)
 end
