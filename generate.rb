@@ -14,11 +14,15 @@ def find_story_id(when_str)
   url = "https://hn.algolia.com/api/v1/search?query=%22ask%20hn:%20who%20is%20hiring%3F%20(#{CGI::escape(when_str)})%22"
   uri = URI(url)
 
+  puts "Searching for 'Who is hiring?' story for #{when_str}..."
+
   json = Net::HTTP.get(uri)
   result = JSON.parse(json)
   if result['nbHits'] > 0
+    puts "Found story for #{when_str}."
     result['hits'][0]['objectID']
   else
+    puts "Could not find story for #{when_str}."
     nil
   end
 end
