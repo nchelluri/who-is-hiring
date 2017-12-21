@@ -6,3 +6,5 @@ Creates an HTML page listing all the postings from "Who Is Hiring?" stories, wit
 Also includes a search box for ad-hoc filtering.
 
 Fetches data from the HN Firebase API.
+
+Run it by typing `./generate.rb`.
