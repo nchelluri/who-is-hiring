@@ -11,20 +11,24 @@
 
   <hr>
 
-  <div class="search">
+  <div class="filter">
     <button id="remote">Remote</button>
     <button id="intern">Interns</button>
     <button id="visa">Visa</button>
+
+    <br/>
+
     <label>
-      Case insensitive search - string literals or regexps:
-      <input id="query" type="text" placeholder="No surrounding slashes"/>
+      Case insensitive filtering:
+      <input id="query" type="text" placeholder="hit enter to activate the filter" />
+      Filters can be string literals or JS regular expressions (do not use surrounding slashes).
     </label>
   </div>
 
   <hr>
 
   <div class="deleted">
-    <button id="restoreDeleted">Restore Deleted Items</button>
+    <button id="restoreAllDeleted">Restore All Deleted Items</button>
   </div>
 
   <hr>
@@ -101,7 +105,7 @@ document.addEventListener('click', function(e) {
   }
 });
 
-document.getElementById('restoreDeleted').addEventListener('click', function() {
+document.getElementById('restoreAllDeleted').addEventListener('click', function() {
   localStorage.setItem('deleted', JSON.stringify({}));
   window.location.reload();
 });

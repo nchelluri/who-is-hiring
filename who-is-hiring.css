@@ -31,11 +31,11 @@ pre {
     display: none;
 }
 
-.search {
+.filter {
     line-height: 150%;
 }
 
-.search input {
+.filter input {
     width: 250px;
 }
 
