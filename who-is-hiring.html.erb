@@ -27,8 +27,8 @@
 
   <hr>
 
-  <div class="deleted">
-    <button id="restoreAllDeleted">Restore All Deleted Items</button>
+  <div class="removed">
+    <button id="restoreAllRemoved">Restore All Removed Items</button>
   </div>
 
   <hr>
@@ -88,32 +88,32 @@ document.addEventListener('click', function(e) {
 
   if (target.tagName == 'DIV' && target.classList.contains('close')) {
     if (target.parentNode.id) {
-      var deleted = localStorage.getItem('deleted');
+      var removed = localStorage.getItem('removed');
 
-      if (! deleted) {
-        deleted = {};
+      if (! removed) {
+        removed = {};
       } else {
-        deleted = JSON.parse(deleted);
+        removed = JSON.parse(removed);
       }
 
-      deleted[target.parentNode.id] = true;
+      removed[target.parentNode.id] = true;
 
-      localStorage.setItem("deleted", JSON.stringify(deleted));
+      localStorage.setItem("removed", JSON.stringify(removed));
     }
 
     target.parentNode.parentNode.removeChild(target.parentNode);
   }
 });
 
-document.getElementById('restoreAllDeleted').addEventListener('click', function() {
-  localStorage.setItem('deleted', JSON.stringify({}));
+document.getElementById('restoreAllRemoved').addEventListener('click', function() {
+  localStorage.setItem('removed', JSON.stringify({}));
   window.location.reload();
 });
 
-var deleted = localStorage.getItem('deleted');
-if (deleted) {
-  deleted = JSON.parse(deleted);
-  Object.keys(deleted).forEach(function(id) {
+var removed = localStorage.getItem('removed');
+if (removed) {
+  removed = JSON.parse(removed);
+  Object.keys(removed).forEach(function(id) {
     var comment = document.getElementById(id);
     if (comment) {
       comment.parentNode.removeChild(comment);
