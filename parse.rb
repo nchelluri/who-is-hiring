@@ -37,7 +37,7 @@ end
 if $0 == __FILE__
   unless ARGV.length == 1
     puts "usage: #{$0} story_id"
-    puts '       where story_id is the ID of a "Who Is Hiring?" post'
+    puts '       where story_id is the ID of a "Who is hiring?" post'
     exit 1
   end
 

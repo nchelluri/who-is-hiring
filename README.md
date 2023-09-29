@@ -1,7 +1,7 @@
 # who-is-hiring
-HackerNews "Who Is Hiring?" Browser
+HackerNews "Who is hiring?" Browser
 
-Creates an HTML page listing all the postings from "Who Is Hiring?" stories, with buttons to filter for "Remote", "Interns" and "Visa" jobs. Also includes an input box for ad-hoc case-insensitive filtering of posts using JS regular expressions, the ability to remove posts from the listing, and the ability to restore all deleted posts.
+Creates an HTML page listing all the postings from "Who is hiring?" stories, with buttons to filter for "Remote", "Interns" and "Visa" jobs. Also includes an input box for ad-hoc case-insensitive filtering of posts using JS regular expressions, the ability to remove posts from the listing, and the ability to restore all deleted posts.
 
 Fetches data from the HN Firebase API.
 
