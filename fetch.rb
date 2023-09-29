@@ -46,7 +46,7 @@ end
 
 def get_comments_for_story(id, fresh = false)
   cached_filename = "story-and-comments-for-#{id}.json"
-  if File.exists?(cached_filename) && ! fresh
+  if File.exist?(cached_filename) && ! fresh
     return JSON.parse(File.read(cached_filename))
   end
 
