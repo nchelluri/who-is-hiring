@@ -7,4 +7,6 @@ Fetches data from the HN Firebase API.
 
 All data is stored locally. No data about any filters you use, links you click, posts you remove from the listing, etc., are ever sent anywhere. There are no analytics.
 
+Try the Go port of this tool: https://github.com/nchelluri/hnjobs
+
 Run it by typing `./generate.rb`. It will generate a file called `who-is-hiring.html` that you can view in your web browser. You can add the `--refresh` parameter to refresh this month's data.
